@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chaty Format Corrector</title>
+    <link rel="icon" href="logo.png" type="image/png">
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -61,17 +62,23 @@
     <script>
         function adjustHeight(textarea) {
             textarea.style.height = 'auto';
-            textarea.style.height = textarea.scrollHeight + 'px';
+            textarea.style.height = textarea.value ? textarea.scrollHeight + 'px' : '150px';
         }
 
         document.getElementById('inputText').addEventListener('input', function() {
             let input = this.value;
 
-            // Remove introduction and closing text (before and after the dashes)
-            input = input.replace(/^(.*?)---/s, '').replace(/---(.*?)$/s, '');
+            // Borrar el texto encima de los tres primeros guiones y debajo de los tres últimos guiones
+            const firstDelimiterIndex = input.indexOf('---');
+            const lastDelimiterIndex = input.lastIndexOf('---');
 
-            // Apply formatting for bold, italic, underline, strikethrough, monospaced, and combined styles
+            if (firstDelimiterIndex !== -1 && lastDelimiterIndex !== -1 && firstDelimiterIndex !== lastDelimiterIndex) {
+                input = input.slice(firstDelimiterIndex + 3, lastDelimiterIndex);
+            }
+
+            // Aplica el formato al texto
             let formatted = input
+                .replace(/\(\*\*_(.*?)_\*\*\)/g, '<strong><em>$1</em></strong>') // Bold & Italic: (**_text_**)
                 .replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>') // Bold & Italic: ***text***
                 .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold: **text**
                 .replace(/\*(.*?)\*/g, '<em>$1</em>') // Italic: *text*
