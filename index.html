@@ -100,9 +100,13 @@
                 .replace(/~(.*?)~/g, '<del>$1</del>')
                 .replace(/`(.*?)`/g, '<code>$1</code>')
                 .replace(/---/g, '<hr>')
-                .replace(/^- (.*?)(?=\n|$)/gm, '<ul><li>$1</li></ul>')
-                .replace(/<\/ul>\n<ul>/g, '')
-                .replace(/^### (.*?)(?=\n|$)/gm, '<h3>$1</h3>');
+                .replace(/^\s*- (.*?)(?=\n|$)/gm, '<li>$1</li>') // Bullet points: - text or space + - text
+
+            // Agrupar las viñetas en una única lista
+            formatted = formatted.replace(/(<li>.*?<\/li>)/gs, '<ul>$1</ul>');
+            formatted = formatted.replace(/<\/ul>\s*<ul>/g, ''); // Eliminar listas duplicadas seguidas
+
+            formatted = formatted.replace(/^### (.*?)(?=\n|$)/gm, '<h3>$1</h3>');
 
             document.getElementById('formattedText').innerHTML = formatted;
 
@@ -113,3 +117,4 @@
     </script>
 </body>
 </html>
+
