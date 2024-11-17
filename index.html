@@ -43,6 +43,11 @@
             min-height: 150px;
             background-color: #f9f9f9;
         }
+        .formatted h3 {
+            margin: 0; /* Elimina los márgenes superiores e inferiores */
+            display: inline; /* Hace que el título esté en línea con el texto */
+            font-size: 1.25em; /* Ajusta el tamaño del título */
+        }
         .formatted a {
             color: #007bff;
             text-decoration: none;
@@ -87,7 +92,8 @@
                 .replace(/`(.*?)`/g, '<code>$1</code>') // Monospaced: `text`
                 .replace(/---/g, '<hr>') // Horizontal rule: ---
                 .replace(/^- (.*?)(?=\n|$)/gm, '<ul><li>$1</li></ul>') // Bullet points: - text
-                .replace(/<\/ul>\n<ul>/g, ''); // Prevent duplicate <ul> tags
+                .replace(/<\/ul>\n<ul>/g, '') // Prevent duplicate <ul> tags
+                .replace(/^### (.*?)(?=\n|$)/gm, '<h3>$1</h3>'); // Title: ### text
 
             document.getElementById('formattedText').innerHTML = formatted;
 
@@ -98,3 +104,4 @@
     </script>
 </body>
 </html>
+
