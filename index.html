@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chaty Format Corrector</title>
     <link rel="icon" href="logo.png" type="image/png">
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DE3TEK9S63"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DE3TEK9S63');
+    </script>
+
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -44,9 +55,9 @@
             background-color: #f9f9f9;
         }
         .formatted h3 {
-            margin: 0; /* Elimina los márgenes superiores e inferiores */
-            display: inline; /* Hace que el título esté en línea con el texto */
-            font-size: 1.25em; /* Ajusta el tamaño del título */
+            margin: 0;
+            display: inline;
+            font-size: 1.25em;
         }
         .formatted a {
             color: #007bff;
@@ -73,7 +84,6 @@
         document.getElementById('inputText').addEventListener('input', function() {
             let input = this.value;
 
-            // Borrar el texto encima de los tres primeros guiones y debajo de los tres últimos guiones
             const firstDelimiterIndex = input.indexOf('---');
             const lastDelimiterIndex = input.lastIndexOf('---');
 
@@ -81,19 +91,18 @@
                 input = input.slice(firstDelimiterIndex + 3, lastDelimiterIndex);
             }
 
-            // Aplica el formato al texto
             let formatted = input
-                .replace(/\(\*\*_(.*?)_\*\*\)/g, '<strong><em>$1</em></strong>') // Bold & Italic: (**_text_**)
-                .replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>') // Bold & Italic: ***text***
-                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold: **text**
-                .replace(/\*(.*?)\*/g, '<em>$1</em>') // Italic: *text*
-                .replace(/__(.*?)__/g, '<u>$1</u>') // Underline: __text__
-                .replace(/~(.*?)~/g, '<del>$1</del>') // Strikethrough: ~text~
-                .replace(/`(.*?)`/g, '<code>$1</code>') // Monospaced: `text`
-                .replace(/---/g, '<hr>') // Horizontal rule: ---
-                .replace(/^- (.*?)(?=\n|$)/gm, '<ul><li>$1</li></ul>') // Bullet points: - text
-                .replace(/<\/ul>\n<ul>/g, '') // Prevent duplicate <ul> tags
-                .replace(/^### (.*?)(?=\n|$)/gm, '<h3>$1</h3>'); // Title: ### text
+                .replace(/\(\*\*_(.*?)_\*\*\)/g, '<strong><em>$1</em></strong>')
+                .replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>')
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                .replace(/__(.*?)__/g, '<u>$1</u>')
+                .replace(/~(.*?)~/g, '<del>$1</del>')
+                .replace(/`(.*?)`/g, '<code>$1</code>')
+                .replace(/---/g, '<hr>')
+                .replace(/^- (.*?)(?=\n|$)/gm, '<ul><li>$1</li></ul>')
+                .replace(/<\/ul>\n<ul>/g, '')
+                .replace(/^### (.*?)(?=\n|$)/gm, '<h3>$1</h3>');
 
             document.getElementById('formattedText').innerHTML = formatted;
 
@@ -104,4 +113,3 @@
     </script>
 </body>
 </html>
-
