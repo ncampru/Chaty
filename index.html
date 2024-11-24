@@ -40,7 +40,7 @@
             border-radius: 8px;
             padding: 12px;
             font-size: 16px;
-            background-color: #fff;
+            background-color: #fff; /* Ambos cajetines ahora tienen fondo blanco */
             border: 1px solid #ddd;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             resize: none;
@@ -52,7 +52,6 @@
             white-space: pre-wrap;
             word-wrap: break-word;
             min-height: 150px;
-            background-color: #f9f9f9;
         }
         .formatted h3 {
             margin: 0;
@@ -71,7 +70,7 @@
 <body>
     <h1>Chaty Format Corrector</h1>
     <div class="container">
-        <textarea id="inputText" class="textarea" placeholder="Paste your text with special characters here" oninput="adjustHeight(this)"></textarea>
+        <textarea id="inputText" class="textarea" placeholder="Paste the text copied using the ChatGPT button · Accompanied by special characters and incorrect formatting, here" oninput="adjustHeight(this)"></textarea>
         <div id="formattedText" class="formatted"></div>
     </div>
 
@@ -100,7 +99,7 @@
                 .replace(/~(.*?)~/g, '<del>$1</del>')
                 .replace(/`(.*?)`/g, '<code>$1</code>')
                 .replace(/---/g, '<hr>')
-                .replace(/^\s*- (.*?)(?=\n|$)/gm, '<li>$1</li>') // Bullet points: - text or space + - text
+                .replace(/^\s*- (.*?)(?=\n|$)/gm, '<li>$1</li>');
 
             // Agrupar las viñetas en una única lista
             formatted = formatted.replace(/(<li>.*?<\/li>)/gs, '<ul>$1</ul>');
@@ -117,4 +116,3 @@
     </script>
 </body>
 </html>
-
